@@ -20,9 +20,13 @@ class Logger {
     this.init();
   }
 
-  async init() {
+  init() {
     if (this.enableFileLogging) {
-      await fs.ensureDir(path.dirname(this.logFile));
+      try {
+        fs.ensureDirSync(path.dirname(this.logFile));
+      } catch (error) {
+        console.warn("Could not create logs directory:", error.message);
+      }
     }
   }
 
