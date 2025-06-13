@@ -1,0 +1,1 @@
+{"discountThreshold":0.25,"minPriceHistory":5,"monitoringInterval":5,"currency":1,"country":"US","notifications":{"browser":true,"email":false,"webhook":false},"theme":"dark","autoRefresh":true}

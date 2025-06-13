@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CS2 Skin Monitor Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-content">
+          <h1><i class="fas fa-chart-line"></i> CS2 Skin Monitor</h1>
+          <div class="header-controls">
+            <div class="status-indicator" id="statusIndicator">
+              <span class="status-dot"></span>
+              <span class="status-text">Disconnected</span>
+            </div>
+            <button id="toggleMonitoring" class="btn btn-primary">
+              <i class="fas fa-play"></i> Start Monitoring
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Stats Cards -->
+        <section class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-eye"></i></div>
+            <div class="stat-content">
+              <h3 id="totalItems">0</h3>
+              <p>Items Monitored</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-bell"></i></div>
+            <div class="stat-content">
+              <h3 id="totalAlerts">0</h3>
+              <p>Alerts Generated</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-sync"></i></div>
+            <div class="stat-content">
+              <h3 id="totalCycles">0</h3>
+              <p>Monitoring Cycles</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-clock"></i></div>
+            <div class="stat-content">
+              <h3 id="lastCycleTime">-</h3>
+              <p>Last Cycle Duration</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+          <!-- Current Deals -->
+          <section class="dashboard-card">
+            <div class="card-header">
+              <h2><i class="fas fa-fire"></i> Current Deals</h2>
+              <button id="refreshDeals" class="btn btn-secondary btn-sm">
+                <i class="fas fa-refresh"></i> Refresh
+              </button>
+            </div>
+            <div class="card-content">
+              <div id="dealsList" class="deals-list">
+                <div class="loading">Loading deals...</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Watchlist Management -->
+          <section class="dashboard-card">
+            <div class="card-header">
+              <h2><i class="fas fa-list"></i> Watchlist</h2>
+              <div class="watchlist-controls">
+                <input
+                  type="text"
+                  id="newItemInput"
+                  placeholder="Enter item name..."
+                  class="input-field"
+                />
+                <button id="addItemBtn" class="btn btn-success btn-sm">
+                  <i class="fas fa-plus"></i> Add
+                </button>
+              </div>
+            </div>
+            <div class="card-content">
+              <div id="watchlistItems" class="watchlist-container">
+                <div class="loading">Loading watchlist...</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Recent Alerts -->
+          <section class="dashboard-card">
+            <div class="card-header">
+              <h2><i class="fas fa-history"></i> Recent Alerts</h2>
+              <button id="clearAlerts" class="btn btn-danger btn-sm">
+                <i class="fas fa-trash"></i> Clear
+              </button>
+            </div>
+            <div class="card-content">
+              <div id="alertsList" class="alerts-list">
+                <div class="loading">Loading alerts...</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Price Chart -->
+          <section class="dashboard-card chart-card">
+            <div class="card-header">
+              <h2><i class="fas fa-chart-area"></i> Price History</h2>
+              <select id="chartItemSelect" class="select-field">
+                <option value="">Select item to view chart...</option>
+              </select>
+            </div>
+            <div class="card-content">
+              <canvas id="priceChart" width="400" height="200"></canvas>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <!-- Real-time Activity Feed -->
+      <aside class="activity-feed">
+        <h3><i class="fas fa-stream"></i> Live Activity</h3>
+        <div id="activityList" class="activity-list">
+          <div class="activity-item">
+            <span class="activity-time">System ready</span>
+            <span class="activity-message"
+              >Waiting for monitoring to start...</span
+            >
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Alert Notification -->
+    <div id="alertNotification" class="alert-notification hidden">
+      <div class="alert-content">
+        <div class="alert-icon"><i class="fas fa-fire"></i></div>
+        <div class="alert-text">
+          <strong class="alert-title"></strong>
+          <p class="alert-message"></p>
+        </div>
+        <button class="alert-close"><i class="fas fa-times"></i></button>
+      </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

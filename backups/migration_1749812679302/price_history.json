@@ -1,0 +1,122 @@
+{
+  "AK-47 | Redline (Field-Tested)": [
+    {
+      "success": true,
+      "price": 54.26,
+      "volume": 72,
+      "timestamp": "2025-06-13T00:39:45.410Z",
+      "raw": {
+        "success": true,
+        "volume": "72",
+        "median_price": "$54.26"
+      }
+    },
+    {
+      "success": true,
+      "price": 54.26,
+      "volume": 72,
+      "timestamp": "2025-06-13T00:40:13.964Z",
+      "raw": {
+        "success": true,
+        "volume": "72",
+        "median_price": "$54.26"
+      }
+    },
+    {
+      "success": true,
+      "price": 51.02,
+      "volume": 69,
+      "timestamp": "2025-06-13T10:32:24.644Z",
+      "raw": {
+        "success": true,
+        "volume": "69",
+        "median_price": "$51.02"
+      }
+    }
+  ],
+  "AK-47 | Fire Serpent (Field-Tested)": [
+    {
+      "success": true,
+      "price": 1359.21,
+      "volume": 0,
+      "timestamp": "2025-06-13T00:40:27.943Z",
+      "raw": {
+        "success": true,
+        "lowest_price": "$1,359.21"
+      }
+    },
+    {
+      "success": true,
+      "price": 1359.21,
+      "volume": 0,
+      "timestamp": "2025-06-13T10:32:38.257Z",
+      "raw": {
+        "success": true,
+        "lowest_price": "$1,359.21"
+      }
+    }
+  ],
+  "AWP | Asiimov (Field-Tested)": [
+    {
+      "success": true,
+      "price": 205.1,
+      "volume": 15,
+      "timestamp": "2025-06-13T00:40:31.430Z",
+      "raw": {
+        "success": true,
+        "volume": "15",
+        "median_price": "$205.10"
+      }
+    },
+    {
+      "success": true,
+      "price": 179.74,
+      "volume": 13,
+      "timestamp": "2025-06-13T10:32:41.784Z",
+      "raw": {
+        "success": true,
+        "volume": "13",
+        "median_price": "$179.74"
+      }
+    }
+  ],
+  "Glock-18 | Fade (Factory New)": [
+    {
+      "success": true,
+      "price": 1800,
+      "volume": 1,
+      "timestamp": "2025-06-13T10:32:48.653Z",
+      "raw": {
+        "success": true,
+        "volume": "1",
+        "median_price": "$1,800.00"
+      }
+    }
+  ],
+  "Gallery Case": [
+    {
+      "success": true,
+      "price": 0.98,
+      "volume": 19686,
+      "timestamp": "2025-06-13T10:32:52.019Z",
+      "raw": {
+        "success": true,
+        "lowest_price": "$0.98",
+        "volume": "19,686",
+        "median_price": "$0.99"
+      }
+    },
+    {
+      "success": true,
+      "price": 0.98,
+      "volume": 19686,
+      "timestamp": "2025-06-13T10:33:59.179Z",
+      "raw": {
+        "success": true,
+        "lowest_price": "$0.98",
+        "volume": "19,686",
+        "median_price": "$0.99"
+      }
+    }
+  ]
+}
