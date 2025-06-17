@@ -152,6 +152,189 @@ class SteamMarketAPI {
     const encodedName = encodeURIComponent(itemName);
     return `${this.baseUrl}/listings/${this.appId}/${encodedName}`;
   }
+
+  async searchItems(query, options = {}) {
+    await this.rateLimiter.checkLimit();
+
+    try {
+      const {
+        maxPrice = 1000,
+        minPrice = 0,
+        limit = 20,
+        currency = 1,
+        sortBy = "price", // 'price', 'name', 'volume'
+      } = options;
+
+      logger.debug(
+        `Searching for: "${query}" with price range $${minPrice}-$${maxPrice}`
+      );
+
+      // Use Steam's search endpoint
+      const searchUrl = `${this.baseUrl}/search/render/?appid=${
+        this.appId
+      }&query=${encodeURIComponent(
+        query
+      )}&start=0&count=${limit}&search_descriptions=0&sort_column=default&sort_dir=asc&norender=1`;
+
+      const response = await axios.get(searchUrl, {
+        headers: this.defaultHeaders,
+        timeout: 15000,
+      });
+
+      if (response.data && response.data.success) {
+        const searchResults = response.data.results || [];
+
+        // Parse search results and get prices
+        const itemsWithPrices = await this.enrichSearchResults(
+          searchResults,
+          currency,
+          maxPrice,
+          minPrice
+        );
+
+        // Sort results
+        const sortedItems = this.sortSearchResults(itemsWithPrices, sortBy);
+
+        return {
+          success: true,
+          items: sortedItems,
+          total: response.data.total_count || 0,
+          query: query,
+          filters: { maxPrice, minPrice, sortBy },
+        };
+      }
+
+      return { success: false, error: "Search failed", items: [] };
+    } catch (error) {
+      logger.error(`Search error: ${error.message}`);
+      return { success: false, error: error.message, items: [] };
+    }
+  }
+
+  async enrichSearchResults(searchResults, currency, maxPrice, minPrice) {
+    const itemsWithPrices = [];
+    const batchSize = 3; // Process items in small batches to avoid rate limiting
+
+    for (let i = 0; i < searchResults.length; i += batchSize) {
+      const batch = searchResults.slice(i, i + batchSize);
+
+      const batchPromises = batch.map(async (item) => {
+        try {
+          const itemName = item.name || item.market_hash_name;
+          if (!itemName) return null;
+
+          // Get current price
+          const priceData = await this.fetchItemPrice(itemName, currency);
+
+          if (
+            priceData.success &&
+            priceData.price >= minPrice &&
+            priceData.price <= maxPrice
+          ) {
+            return {
+              name: itemName,
+              price: priceData.price,
+              volume: priceData.volume,
+              image: item.asset_description?.icon_url
+                ? `https://community.cloudflare.steamstatic.com/economy/image/${item.asset_description.icon_url}`
+                : null,
+              exterior: this.extractExterior(itemName),
+              weapon: this.extractWeapon(itemName),
+              rarity:
+                item.asset_description?.tags?.find(
+                  (tag) => tag.category === "Rarity"
+                )?.localized_tag_name || "Unknown",
+              marketUrl: this.generateMarketUrl(itemName),
+            };
+          }
+
+          return null;
+        } catch (error) {
+          logger.debug(
+            `Error getting price for ${item.name}: ${error.message}`
+          );
+          return null;
+        }
+      });
+
+      const batchResults = await Promise.all(batchPromises);
+      itemsWithPrices.push(...batchResults.filter((item) => item !== null));
+
+      // Small delay between batches
+      if (i + batchSize < searchResults.length) {
+        await this.rateLimiter.sleep(1000);
+      }
+    }
+
+    return itemsWithPrices;
+  }
+
+  sortSearchResults(items, sortBy) {
+    switch (sortBy) {
+      case "price":
+        return items.sort((a, b) => a.price - b.price);
+      case "name":
+        return items.sort((a, b) => a.name.localeCompare(b.name));
+      case "volume":
+        return items.sort((a, b) => b.volume - a.volume);
+      default:
+        return items;
+    }
+  }
+
+  extractExterior(itemName) {
+    const exteriors = [
+      "Factory New",
+      "Minimal Wear",
+      "Field-Tested",
+      "Well-Worn",
+      "Battle-Scarred",
+    ];
+    for (const exterior of exteriors) {
+      if (itemName.includes(`(${exterior})`)) {
+        return exterior;
+      }
+    }
+    return null;
+  }
+
+  extractWeapon(itemName) {
+    const weapons = [
+      "AK-47",
+      "M4A4",
+      "M4A1-S",
+      "AWP",
+      "Desert Eagle",
+      "Glock-18",
+      "USP-S",
+      "Karambit",
+      "Bayonet",
+    ];
+    for (const weapon of weapons) {
+      if (itemName.includes(weapon)) {
+        return weapon;
+      }
+    }
+    return itemName.split(" |")[0] || "Unknown";
+  }
+
+  // Predefined search for popular CS2 items by category
+  async getPopularItems(category, options = {}) {
+    const queries = {
+      rifles: "AK-47 M4A4 M4A1-S",
+      pistols: "Desert Eagle Glock-18 USP-S",
+      snipers: "AWP SSG 08",
+      knives: "Karambit Bayonet Huntsman",
+      cases: "Case",
+      stickers: "Sticker",
+    };
+
+    if (queries[category]) {
+      return await this.searchItems(queries[category], options);
+    }
+
+    return { success: false, error: "Unknown category", items: [] };
+  }
 }
 
 module.exports = { SteamMarketAPI };

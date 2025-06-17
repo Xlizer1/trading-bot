@@ -32,6 +32,51 @@
         "volume": "69",
         "median_price": "$51.02"
       }
+    },
+    {
+      "success": true,
+      "price": 61.65,
+      "volume": 69,
+      "timestamp": "2025-06-13T11:30:06.676Z",
+      "raw": {
+        "success": true,
+        "volume": "69",
+        "median_price": "$61.65"
+      }
+    },
+    {
+      "success": true,
+      "price": 61.65,
+      "volume": 69,
+      "timestamp": "2025-06-13T11:35:06.888Z",
+      "raw": {
+        "success": true,
+        "volume": "69",
+        "median_price": "$61.65"
+      }
+    },
+    {
+      "success": true,
+      "price": 61.65,
+      "volume": 69,
+      "timestamp": "2025-06-13T11:40:07.206Z",
+      "raw": {
+        "success": true,
+        "lowest_price": "$49.82",
+        "volume": "69",
+        "median_price": "$61.65"
+      }
+    },
+    {
+      "success": true,
+      "price": 61.65,
+      "volume": 69,
+      "timestamp": "2025-06-13T11:45:06.564Z",
+      "raw": {
+        "success": true,
+        "volume": "69",
+        "median_price": "$61.65"
+      }
     }
   ],
   "AK-47 | Fire Serpent (Field-Tested)": [
@@ -116,6 +161,128 @@
         "lowest_price": "$0.98",
         "volume": "19,686",
         "median_price": "$0.99"
+      }
+    },
+    {
+      "success": true,
+      "price": 0.99,
+      "volume": 19702,
+      "timestamp": "2025-06-13T11:22:29.819Z",
+      "raw": {
+        "success": true,
+        "lowest_price": "$0.98",
+        "volume": "19,702",
+        "median_price": "$0.99"
+      }
+    },
+    {
+      "success": true,
+      "price": 0.99,
+      "volume": 19702,
+      "timestamp": "2025-06-13T11:25:01.917Z",
+      "raw": {
+        "success": true,
+        "lowest_price": "$0.98",
+        "volume": "19,702",
+        "median_price": "$0.99"
+      }
+    },
+    {
+      "success": true,
+      "price": 0.99,
+      "volume": 19702,
+      "timestamp": "2025-06-13T11:30:01.376Z",
+      "raw": {
+        "success": true,
+        "lowest_price": "$0.98",
+        "volume": "19,702",
+        "median_price": "$0.99"
+      }
+    },
+    {
+      "success": true,
+      "price": 0.99,
+      "volume": 19702,
+      "timestamp": "2025-06-13T11:35:01.227Z",
+      "raw": {
+        "success": true,
+        "lowest_price": "$0.98",
+        "volume": "19,702",
+        "median_price": "$0.99"
+      }
+    },
+    {
+      "success": true,
+      "price": 0.99,
+      "volume": 19702,
+      "timestamp": "2025-06-13T11:40:01.604Z",
+      "raw": {
+        "success": true,
+        "lowest_price": "$0.97",
+        "volume": "19,702",
+        "median_price": "$0.99"
+      }
+    },
+    {
+      "success": true,
+      "price": 0.99,
+      "volume": 19702,
+      "timestamp": "2025-06-13T11:45:00.767Z",
+      "raw": {
+        "success": true,
+        "lowest_price": "$0.97",
+        "volume": "19,702",
+        "median_price": "$0.99"
+      }
+    }
+  ],
+  "Desert Eagle | Printstream (Field-Tested)": [
+    {
+      "success": true,
+      "price": 40.67,
+      "volume": 166,
+      "timestamp": "2025-06-13T11:30:03.742Z",
+      "raw": {
+        "success": true,
+        "lowest_price": "$41.47",
+        "volume": "166",
+        "median_price": "$40.67"
+      }
+    },
+    {
+      "success": true,
+      "price": 40.67,
+      "volume": 166,
+      "timestamp": "2025-06-13T11:35:03.879Z",
+      "raw": {
+        "success": true,
+        "lowest_price": "$41.54",
+        "volume": "166",
+        "median_price": "$40.67"
+      }
+    },
+    {
+      "success": true,
+      "price": 40.67,
+      "volume": 166,
+      "timestamp": "2025-06-13T11:40:04.203Z",
+      "raw": {
+        "success": true,
+        "lowest_price": "$41.54",
+        "volume": "166",
+        "median_price": "$40.67"
+      }
+    },
+    {
+      "success": true,
+      "price": 40.67,
+      "volume": 166,
+      "timestamp": "2025-06-13T11:45:03.442Z",
+      "raw": {
+        "success": true,
+        "lowest_price": "$41.45",
+        "volume": "166",
+        "median_price": "$40.67"
       }
     }
   ]

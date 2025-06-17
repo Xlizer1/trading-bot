@@ -134,6 +134,133 @@
         </div>
       </main>
 
+      <section class="search-section">
+        <div class="search-card">
+          <div class="search-header">
+            <h2><i class="fas fa-search"></i> Search CS2 Skins</h2>
+            <button id="toggleSearch" class="btn btn-secondary btn-sm">
+              <i class="fas fa-eye"></i> Show Search
+            </button>
+          </div>
+
+          <div id="searchContainer" class="search-container hidden">
+            <!-- Search Form -->
+            <div class="search-form">
+              <div class="search-inputs">
+                <div class="search-field-group">
+                  <label for="searchQuery">Search for skins:</label>
+                  <input
+                    type="text"
+                    id="searchQuery"
+                    placeholder="e.g. AK-47 Redline, AWP Dragon Lore..."
+                    class="input-field search-input"
+                  />
+                </div>
+
+                <div class="price-filters">
+                  <div class="price-field">
+                    <label for="minPrice">Min Price ($):</label>
+                    <input
+                      type="number"
+                      id="minPrice"
+                      min="0"
+                      step="0.01"
+                      value="0"
+                      class="input-field price-input"
+                    />
+                  </div>
+
+                  <div class="price-field">
+                    <label for="maxPrice">Max Price ($):</label>
+                    <input
+                      type="number"
+                      id="maxPrice"
+                      min="0"
+                      step="0.01"
+                      value="100"
+                      class="input-field price-input"
+                    />
+                  </div>
+
+                  <div class="sort-field">
+                    <label for="sortBy">Sort by:</label>
+                    <select id="sortBy" class="select-field">
+                      <option value="price">Price (Low to High)</option>
+                      <option value="name">Name</option>
+                      <option value="volume">Volume</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="search-actions">
+                <button id="searchBtn" class="btn btn-primary">
+                  <i class="fas fa-search"></i> Search
+                </button>
+                <button id="clearSearchBtn" class="btn btn-secondary">
+                  <i class="fas fa-times"></i> Clear
+                </button>
+              </div>
+            </div>
+
+            <!-- Quick Categories -->
+            <div class="search-categories">
+              <h4>Quick Search Categories:</h4>
+              <div class="category-buttons">
+                <button
+                  class="btn btn-outline category-btn"
+                  data-category="rifles"
+                >
+                  <i class="fas fa-crosshairs"></i> Rifles
+                </button>
+                <button
+                  class="btn btn-outline category-btn"
+                  data-category="pistols"
+                >
+                  <i class="fas fa-bullseye"></i> Pistols
+                </button>
+                <button
+                  class="btn btn-outline category-btn"
+                  data-category="snipers"
+                >
+                  <i class="fas fa-dot-circle"></i> Snipers
+                </button>
+                <button
+                  class="btn btn-outline category-btn"
+                  data-category="knives"
+                >
+                  <i class="fas fa-cut"></i> Knives
+                </button>
+                <button
+                  class="btn btn-outline category-btn"
+                  data-category="cases"
+                >
+                  <i class="fas fa-box"></i> Cases
+                </button>
+              </div>
+            </div>
+
+            <!-- Search Results -->
+            <div id="searchResults" class="search-results hidden">
+              <div class="results-header">
+                <h4 id="resultsTitle">Search Results</h4>
+                <span id="resultsCount" class="results-count"></span>
+              </div>
+              <div id="resultsList" class="results-list">
+                <!-- Results will be populated here -->
+              </div>
+            </div>
+
+            <!-- Search Loading -->
+            <div id="searchLoading" class="search-loading hidden">
+              <div class="loading-spinner">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Searching Steam Market...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <!-- Real-time Activity Feed -->
       <aside class="activity-feed">
         <h3><i class="fas fa-stream"></i> Live Activity</h3>

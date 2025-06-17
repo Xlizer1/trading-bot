@@ -585,3 +585,352 @@ body {
     gap: 8px;
   }
 }
+
+/* Add this CSS to your src/ui/static/style.css */
+
+/* Search Section */
+.search-section {
+  margin-bottom: 30px;
+}
+
+.search-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.search-header {
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.02);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-header h2 {
+  color: #2d3748;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.search-header h2 i {
+  color: #667eea;
+  margin-right: 8px;
+}
+
+.search-container {
+  padding: 20px;
+}
+
+.search-container.hidden {
+  display: none;
+}
+
+/* Search Form */
+.search-form {
+  margin-bottom: 25px;
+}
+
+.search-inputs {
+  display: grid;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.search-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.search-field-group label {
+  font-weight: 500;
+  color: #4a5568;
+  font-size: 0.9rem;
+}
+
+.search-input {
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+}
+
+.price-filters {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 15px;
+  align-items: end;
+}
+
+.price-field,
+.sort-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.price-field label,
+.sort-field label {
+  font-weight: 500;
+  color: #4a5568;
+  font-size: 0.85rem;
+}
+
+.price-input {
+  padding: 8px 10px;
+}
+
+.search-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Categories */
+.search-categories {
+  margin-bottom: 25px;
+  padding: 20px;
+  background: rgba(102, 126, 234, 0.05);
+  border-radius: 10px;
+}
+
+.search-categories h4 {
+  color: #4a5568;
+  margin-bottom: 12px;
+  font-size: 1rem;
+}
+
+.category-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.btn-outline {
+  background: white;
+  border: 2px solid #e2e8f0;
+  color: #4a5568;
+  transition: all 0.2s ease;
+}
+
+.btn-outline:hover,
+.btn-outline.active {
+  border-color: #667eea;
+  background: #667eea;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.category-btn {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+}
+
+.category-btn i {
+  margin-right: 6px;
+}
+
+/* Search Results */
+.search-results {
+  margin-top: 20px;
+}
+
+.search-results.hidden {
+  display: none;
+}
+
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.results-header h4 {
+  color: #2d3748;
+  margin: 0;
+}
+
+.results-count {
+  color: #718096;
+  font-size: 0.9rem;
+}
+
+.results-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+/* Search Result Items */
+.search-result-item {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 15px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.search-result-item:hover {
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.search-result-item.in-watchlist {
+  background: #f0fdf4;
+  border-color: #10b981;
+}
+
+.search-result-item.in-watchlist::before {
+  content: "✓ In Watchlist";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #10b981;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.result-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.result-image {
+  width: 40px;
+  height: 30px;
+  object-fit: contain;
+  border-radius: 4px;
+  background: #f7fafc;
+}
+
+.result-name {
+  font-weight: 600;
+  color: #2d3748;
+  font-size: 0.9rem;
+  flex: 1;
+  line-height: 1.3;
+}
+
+.result-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 0.85rem;
+}
+
+.result-price {
+  font-weight: 700;
+  color: #059669;
+  font-size: 1.1rem;
+}
+
+.result-volume {
+  color: #718096;
+}
+
+.result-exterior {
+  color: #4a5568;
+  font-weight: 500;
+}
+
+.result-weapon {
+  color: #667eea;
+  font-weight: 500;
+}
+
+.result-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-add-to-watchlist {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  flex: 1;
+}
+
+.btn-view-market {
+  background: #e2e8f0;
+  color: #4a5568;
+  padding: 6px 10px;
+}
+
+/* Search Loading */
+.search-loading {
+  text-align: center;
+  padding: 40px 20px;
+  color: #718096;
+}
+
+.search-loading.hidden {
+  display: none;
+}
+
+.loading-spinner i {
+  font-size: 2rem;
+  color: #667eea;
+  margin-bottom: 10px;
+}
+
+.loading-spinner p {
+  margin: 0;
+  font-style: italic;
+}
+
+/* No Results */
+.no-results {
+  text-align: center;
+  padding: 40px 20px;
+  color: #718096;
+}
+
+.no-results i {
+  font-size: 3rem;
+  color: #cbd5e0;
+  margin-bottom: 15px;
+  display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .price-filters {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .search-actions {
+    flex-direction: column;
+  }
+
+  .category-buttons {
+    justify-content: center;
+  }
+
+  .results-list {
+    grid-template-columns: 1fr;
+  }
+
+  .result-details {
+    grid-template-columns: 1fr;
+  }
+
+  .result-actions {
+    flex-direction: column;
+  }
+}

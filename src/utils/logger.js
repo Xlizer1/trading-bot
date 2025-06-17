@@ -1,3 +1,5 @@
+// src/utils/logger.js
+
 const chalk = require("chalk");
 const fs = require("fs-extra");
 const path = require("path");
@@ -8,7 +10,7 @@ class Logger {
     this.logFile = path.join(__dirname, "../../logs/app.log");
     this.enableFileLogging = process.env.ENABLE_FILE_LOGGING === "true";
     this.verbose = process.env.VERBOSE === "true";
-    this.debug = process.env.DEBUG === "true";
+    this.debugEnabled = process.env.DEBUG === "true"; // Renamed to avoid conflict
 
     this.levels = {
       error: 0,
@@ -76,7 +78,7 @@ class Logger {
   }
 
   debug(message, meta = {}) {
-    if (!this.shouldLog("debug") || !this.debug) return;
+    if (!this.shouldLog("debug") || !this.debugEnabled) return; // Use renamed property
 
     const formatted = this.formatMessage("debug", message, meta);
     console.log(chalk.gray("🔍 " + message));
@@ -126,7 +128,7 @@ class Logger {
     const message = `API ${endpoint} - ${status}`;
     console.log(color(icon + " " + message));
 
-    if (this.debug && data) {
+    if (this.debugEnabled && data) {
       console.log(chalk.gray("   Data:", JSON.stringify(data, null, 2)));
     }
 

@@ -176,10 +176,69 @@ class Monitor extends EventEmitter {
 
   async addToWatchlist(itemName) {
     try {
+      // First, test if the item exists by fetching its price
+      logger.info(`Testing item availability: ${itemName}`);
+      const priceData = await this.steamApi.fetchItemPrice(itemName);
+
+      if (!priceData.success) {
+        return {
+          success: false,
+          error: `Unable to find item "${itemName}" on Steam Market. Please check the spelling and try again.`,
+          details: priceData.error,
+        };
+      }
+
+      // Item exists, add to watchlist
       await this.dataManager.addToWatchlist(itemName);
-      logger.info(`Added "${itemName}" to watchlist`);
-      this.emit("watchlistUpdated", { action: "add", itemName });
-      return { success: true };
+
+      // Store the initial price data
+      await this.dataManager.storePriceData(itemName, priceData);
+
+      // Analyze the price immediately
+      const analysis = await this.analyzer.analyzePrice(
+        itemName,
+        priceData.price
+      );
+
+      logger.info(
+        `Added "${itemName}" to watchlist with initial price: $${priceData.price}`
+      );
+
+      this.emit("watchlistUpdated", {
+        action: "add",
+        itemName,
+        initialPrice: priceData.price,
+        volume: priceData.volume,
+        analysis: analysis,
+      });
+
+      // Emit the item data for real-time UI updates
+      this.emit("itemProcessed", {
+        itemName,
+        success: true,
+        price: priceData.price,
+        volume: priceData.volume,
+        analysis,
+        timestamp: priceData.timestamp,
+        isNewItem: true,
+      });
+
+      return {
+        success: true,
+        message: `Successfully added "${itemName}" to watchlist`,
+        priceData: {
+          price: priceData.price,
+          volume: priceData.volume,
+          hasEnoughData: analysis.hasEnoughData,
+          analysis: analysis.hasEnoughData
+            ? {
+                isGoodDeal: analysis.isGoodDeal,
+                discountPercent: analysis.discountPercent,
+                dealScore: analysis.dealScore,
+              }
+            : null,
+        },
+      };
     } catch (error) {
       logger.error(`Error adding to watchlist: ${error.message}`);
       return { success: false, error: error.message };
